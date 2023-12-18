@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TicketRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -23,6 +25,14 @@ class Ticket
     #[ORM\ManyToOne(inversedBy: 'tickets')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Type $relation = null;
+
+    #[ORM\OneToMany(mappedBy: 'id_ticket', targetEntity: Lier::class)]
+    private Collection $liers;
+
+    public function __construct()
+    {
+        $this->liers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -61,6 +71,36 @@ class Ticket
     public function setRelation(?Type $relation): static
     {
         $this->relation = $relation;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Lier>
+     */
+    public function getLiers(): Collection
+    {
+        return $this->liers;
+    }
+
+    public function addLier(Lier $lier): static
+    {
+        if (!$this->liers->contains($lier)) {
+            $this->liers->add($lier);
+            $lier->setIdTicket($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLier(Lier $lier): static
+    {
+        if ($this->liers->removeElement($lier)) {
+            // set the owning side to null (unless already changed)
+            if ($lier->getIdTicket() === $this) {
+                $lier->setIdTicket(null);
+            }
+        }
 
         return $this;
     }

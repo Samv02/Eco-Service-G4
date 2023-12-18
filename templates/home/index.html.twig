@@ -1,0 +1,14 @@
+{# home/index.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1>Bienvenue sur Mon Site E-commerce</h1>
+    
+    <h2>Nos Produits</h2>
+    <ul>
+        {% for product in products %}
+            <li>{{ product.name }} - {{ product.price }} €</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

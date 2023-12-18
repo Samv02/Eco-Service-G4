@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UtilisateurRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
@@ -34,6 +36,21 @@ class Utilisateur
     #[ORM\ManyToOne(inversedBy: 'utilisateurs')]
     private ?Adresse $id_adresse
      = null;
+
+    #[ORM\OneToMany(mappedBy: 'id_user', targetEntity: Commande::class)]
+    private Collection $commandes;
+
+    #[ORM\OneToMany(mappedBy: 'id_user', targetEntity: Lier::class)]
+    private Collection $liers;
+
+    #[ORM\Column]
+    private ?bool $role = null;
+
+    public function __construct()
+    {
+        $this->commandes = new ArrayCollection();
+        $this->liers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -120,6 +137,78 @@ class Utilisateur
     public function setIdCat(?Adresse $id_adresse): static
     {
         $this->id_adresse = $id_adresse;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commande>
+     */
+    public function getCommandes(): Collection
+    {
+        return $this->commandes;
+    }
+
+    public function addCommande(Commande $commande): static
+    {
+        if (!$this->commandes->contains($commande)) {
+            $this->commandes->add($commande);
+            $commande->setIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommande(Commande $commande): static
+    {
+        if ($this->commandes->removeElement($commande)) {
+            // set the owning side to null (unless already changed)
+            if ($commande->getIdUser() === $this) {
+                $commande->setIdUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Lier>
+     */
+    public function getLiers(): Collection
+    {
+        return $this->liers;
+    }
+
+    public function addLier(Lier $lier): static
+    {
+        if (!$this->liers->contains($lier)) {
+            $this->liers->add($lier);
+            $lier->setIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLier(Lier $lier): static
+    {
+        if ($this->liers->removeElement($lier)) {
+            // set the owning side to null (unless already changed)
+            if ($lier->getIdUser() === $this) {
+                $lier->setIdUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function isRole(): ?bool
+    {
+        return $this->role;
+    }
+
+    public function setRole(bool $role): static
+    {
+        $this->role = $role;
 
         return $this;
     }

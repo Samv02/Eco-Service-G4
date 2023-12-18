@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\RecettesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -22,6 +24,14 @@ class Recettes
 
     #[ORM\Column(length: 255)]
     private ?string $img_recette = null;
+
+    #[ORM\OneToMany(mappedBy: 'id_recette', targetEntity: Construire::class)]
+    private Collection $construires;
+
+    public function __construct()
+    {
+        $this->construires = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -60,6 +70,36 @@ class Recettes
     public function setImgRecette(string $img_recette): static
     {
         $this->img_recette = $img_recette;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Construire>
+     */
+    public function getConstruires(): Collection
+    {
+        return $this->construires;
+    }
+
+    public function addConstruire(Construire $construire): static
+    {
+        if (!$this->construires->contains($construire)) {
+            $this->construires->add($construire);
+            $construire->setIdRecette($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConstruire(Construire $construire): static
+    {
+        if ($this->construires->removeElement($construire)) {
+            // set the owning side to null (unless already changed)
+            if ($construire->getIdRecette() === $this) {
+                $construire->setIdRecette(null);
+            }
+        }
 
         return $this;
     }

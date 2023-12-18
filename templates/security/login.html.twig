@@ -1,0 +1,27 @@
+{# security/login.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div>
+    <div>
+        <h1>Connexion<h1>
+    </div>
+    <div>
+        <form action="{{ path('app_security.login') }}" method="post">
+
+            <label for="email">E-mail <span>*</span>:</label>
+            <input type="email" id="email" name="email" required><br>
+
+            <label for="mot_de_passe">Mot de passe <span>*</span>:</label>
+            <input type="password" id="mot_de_passe" name="mot_de_passe" required><br>
+
+            <input type="submit" value="S'inscrire">
+
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+

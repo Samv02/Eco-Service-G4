@@ -1,4 +1,7 @@
 <?php
+
+namespace App\Controller;
+
 // Import necessary classes
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;

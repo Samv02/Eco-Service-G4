@@ -1,14 +1,25 @@
-{# home/index.html.twig #}
+{# templates/home/index.html.twig #}
 
 {% extends 'base.html.twig' %}
 
-{% block content %}
-    <h1>Bienvenue sur Mon Site E-commerce</h1>
-    
-    <h2>Nos Produits</h2>
-    <ul>
-        {% for product in products %}
-            <li>{{ product.name }} - {{ product.price }} €</li>
-        {% endfor %}
-    </ul>
+{% block title %}Home{% endblock %}
+
+{% block body %}
+    <h1>Welcome to the Home Page</h1>
+
+    {% if products is not empty %}
+        <ul>
+            {% for product in products %}
+                <li>
+                    <h2>{{ product.nom_produit }}</h2>
+                    <img src="{{ product.img_produit }}" alt="{{ product.nom_produit }}">
+                    <p>{{ product.description_produit }}</p>
+                    <p>Category: {{ product.category.nom_cat }}</p>
+                    <p>Marque: {{ product.Marque.nom_marque }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No products available.</p>
+    {% endif %}
 {% endblock %}

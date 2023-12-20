@@ -1,13 +1,13 @@
 {# templates/home/index.html.twig #}
 
-{% extends 'base.html.twig' %}
-
-{% block title %}Home{% endblock %}
-
 {% block body %}
     <h1>Welcome to the Home Page</h1>
 
-    {% if products is not empty %}
+    {# Example of filter links #}
+    <a href="{{ path('app_home', {'marque': 'marque'}) }}">Filtre par Marque</a>
+    <a href="{{ path('app_home', {'categorie': 'categorie'}) }}">Filtre par Catégorie</a>
+
+    {% if products is not empty %}  
         <ul>
             {% for product in products %}
                 <li>

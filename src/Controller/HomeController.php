@@ -23,8 +23,12 @@ class HomeController extends AbstractController
     #[Route('/home', name: 'app_home')]
     public function index(Request $request): Response
     {
-            $products = $this->produitRepository->findAll();
-        
+        $marque = $request->query->get('marque');
+        $categorie = $request->query->get('categorie');
+        $produit = $request->query->get('produit');
+
+        // Use the filter criteria in your repository query
+        $products = $this->produitRepository->findByFilterCriteria($marque, $categorie, $produit);
 
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',

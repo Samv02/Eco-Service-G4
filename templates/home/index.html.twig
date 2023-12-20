@@ -1,14 +1,33 @@
-{# home/index.html.twig #}
+{# templates/home/index.html.twig #}
 
 {% extends 'base.html.twig' %}
 
-{% block content %}
-    <h1>Bienvenue sur Mon Site E-commerce</h1>
-    
-    <h2>Nos Produits</h2>
-    <ul>
-        {% for product in products %}
-            <li>{{ product.name }} - {{ product.price }} €</li>
-        {% endfor %}
-    </ul>
+{% block title %}Home{% endblock %}
+
+{% block body %}
+    <h1>Welcome to the Home Page</h1>
+
+    {% if products is not empty %}
+        <ul>
+            {% for product in products %}
+                <li>
+                    <h2>{{ product.getNomProduit() }}</h2>
+                    <img src="{{ product.getImgProduit() }}" alt="{{ product.getNomProduit() }}">
+                    <p>{{ product.getDescription() }}</p>
+                    
+                    {# Check if id_cat is not null before accessing properties #}
+                    {% if product.getIdCat() is not null %}
+                        <p>Category: {{ product.getIdCat().getNomCat() }}</p>
+                    {% endif %}
+                    
+                    {# Check if id_marque is not null before accessing properties #}
+                    {% if product.getIdMarque() is not null %}
+                        <p>Marque: {{ product.getIdMarque().getNomMarque() }}</p>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No products available.</p>
+    {% endif %}
 {% endblock %}

@@ -1,11 +1,14 @@
 <?php
 
+// src/Controller/HomeController.php
+
 namespace App\Controller;
 
-// Import necessary classes
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Form\ProductFilterType;
 use App\Repository\ProduitRepository;
 
 class HomeController extends AbstractController
@@ -18,10 +21,10 @@ class HomeController extends AbstractController
     }
 
     #[Route('/home', name: 'app_home')]
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        // Access the repository using $this->produitRepository
-        $products = $this->produitRepository->findAll();
+            $products = $this->produitRepository->findAll();
+        
 
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',

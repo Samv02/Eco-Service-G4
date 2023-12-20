@@ -11,11 +11,19 @@
         <ul>
             {% for product in products %}
                 <li>
-                    <h2>{{ product.nom_produit }}</h2>
-                    <img src="{{ product.img_produit }}" alt="{{ product.nom_produit }}">
-                    <p>{{ product.description_produit }}</p>
-                    <p>Category: {{ product.category.nom_cat }}</p>
-                    <p>Marque: {{ product.Marque.nom_marque }}</p>
+                    <h2>{{ product.getNomProduit() }}</h2>
+                    <img src="{{ product.getImgProduit() }}" alt="{{ product.getNomProduit() }}">
+                    <p>{{ product.getDescription() }}</p>
+                    
+                    {# Check if id_cat is not null before accessing properties #}
+                    {% if product.getIdCat() is not null %}
+                        <p>Category: {{ product.getIdCat().getNomCat() }}</p>
+                    {% endif %}
+                    
+                    {# Check if id_marque is not null before accessing properties #}
+                    {% if product.getIdMarque() is not null %}
+                        <p>Marque: {{ product.getIdMarque().getNomMarque() }}</p>
+                    {% endif %}
                 </li>
             {% endfor %}
         </ul>

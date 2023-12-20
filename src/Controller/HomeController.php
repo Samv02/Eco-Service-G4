@@ -20,7 +20,7 @@ class HomeController extends AbstractController
         $this->produitRepository = $produitRepository;
     }
 
-    #[Route('/home', name: 'app_home')]
+    #[Route('/', name: 'app_home')]
     public function index(Request $request): Response
     {
         $marque = $request->query->get('marque');

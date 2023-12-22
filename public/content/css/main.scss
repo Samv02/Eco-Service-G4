@@ -1,0 +1,185 @@
+@import url(https://fonts.googleapis.com/css?family=Inter);
+
+//VARIABLES:
+$dark--900: #060609;
+$dark--800: #1c1b24;
+$dark--700: #2f2e39;
+$dark--600: #3f3e46;
+$dark--500: #505048;
+$dark--400: #5f5f65;
+$dark--300: #7e7e89;
+$dark--200: #b5b5c3;
+$dark--100: #dadadd;
+$dark--50: #f7f7f7;
+$dark--25: #fafafa;
+
+$primary--500: #218f65;
+$primary--400: #95d6a3;
+$primary--300: #81ccbc;
+$primary--200: #c9eee6;
+$primary--100: #f2fbf9;
+
+$secondary: #f9c746;
+$white: #ffffff;
+
+//MAIN STYLE
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+//NAVBAR STYLE
+.navbar--wrapper{
+    background-color: $dark--900;
+
+    .top--navbar{
+        display: flex;
+        align-items: center;
+        gap: 50px;
+        padding: 22px 44px;
+
+        .logo-desk{
+            width: 175px;
+            display: none;
+        }
+        .logo-mobile{
+            width: 70px;
+        }
+        .searchbar-wrapper{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 8px 16px;
+            border-radius: 8px;
+            background-color: $white;
+
+            input{
+                color: $dark--900;
+                font-family: 'Inter';
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+
+                width: 100%;
+
+                border: none;
+                outline: none;
+            }
+
+            &>img{
+                cursor: pointer;
+            }
+        }
+        .menu-wrapper-desktop{
+            display: none;
+        }
+        .menu-wrapper-mobile{
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+
+            .profil--wrapper{
+                display: flex;
+                align-items: center;
+                
+                .initiales-profil{
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    background-color: $primary--500;
+                    color: $white;
+                    font-size: 16px;
+                    font-weight: 600;
+                    display: none;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                &.connected{
+                   .button-connection{
+                        display: none;
+                    }
+                    .initiales-profil{
+                        display: flex;
+                    } 
+                }
+            }
+            .burger-menu-button{
+                width: 25px;
+                height: 1px;
+                background-color: $white;
+                z-index: 10;
+                
+                &::before, &::after{
+                    content: '';
+                    position: absolute;
+                    width: 25px;
+                    height: 1px;
+                    background-color: $white;
+                }
+                &::before{
+                    transform: translateY(-10px);
+                }
+                &::after{
+                    transform: translateY(10px);
+                }
+
+                &.opened{
+                    background: none;
+                    &::before{
+                        transform: rotate(45deg) translate(0);
+                    }
+                    &::after{
+                        transform: rotate(-45deg) translate(0);
+                    }
+                
+                }
+            }
+        }
+        .popup-menu-mobile{
+            translate: translateX(300%);
+            display: flex;
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: $secondary;
+            padding-top: 120px;
+            height: 100vh;
+            width: 75vw;
+
+            nav{
+                width: 100%;
+                ul{
+                    width: 100%;
+                    li{
+                        width: 100%;
+                        a{
+                            padding: 16px 44px;
+                            display: flex;
+                            align-items: center;
+                            gap: 20px;
+                            width: 100%;
+
+                            img{
+                                filter: invert(0%) sepia(0%) saturate(12%) hue-rotate(257deg) brightness(100%) contrast(104%); 
+                            }
+                        }
+                    }
+                }
+            }
+            
+            &.opened{
+                translate: translate(0);
+            }
+        }
+    }
+
+    h1{
+        color: $dark--50
+    }
+}

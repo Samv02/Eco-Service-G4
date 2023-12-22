@@ -1,0 +1,75 @@
+<header class="navbar--wrapper">
+    <div class="top--navbar">
+        <img class="logo-desk" src="{{ asset('content/img/logo-ecoservices-line-white_color.svg') }}" alt="Logo Eco Services SVG"/>
+        <img class="logo-mobile" src="{{ asset('content/img/logo-ecoservices-icon-white_color.svg') }}" alt="Logo Eco Services Icone SVG"/>
+        <div class="searchbar-wrapper">
+            <input type="text" name="searchbar" id="searchbar" placeholder="Que recherchez-vous ?">
+            <img src="{{ asset('content/icons/search.svg') }}" alt="search icon svg"/>
+        </div>
+
+        <div class="menu-wrapper-desktop">
+            <nav>
+                <ul>
+                    <li>
+                        <a href="#" title="Qui sommes nous ?">Qui sommes nous</a>
+                    </li>
+                    <li>
+                        <a href="#" title="DIY">DIY</a>
+                    </li>
+                    <li>
+                        <a href="#" title="Aide">Aide</a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="{{ asset('content/icons/profil.svg') }}" alt="user icon svg"/> 
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="{{ asset('content/icons/cart.svg') }}" alt="shopping cart icon svg"/>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="menu-wrapper-mobile">
+            {# Ajouter la classe "connected" à "profil--wrapper" si l'utilisateur est connecté #}
+            <div class="profil--wrapper connected">
+                {# Afficher si connecté (avec les initiales du client) #}
+                <span class="initiales-profil">FF</span>
+                {# Afficher uniquement si l'utilisateur n'est pas connecté #}
+                <a href="#" class="button-connection">
+                    <img src="{{ asset('content/icons/profil.svg') }}" alt="profile icon svg">
+                </a>
+            </div>
+
+            <div class="burger-menu-button opened">
+                <span></span>
+            </div>
+        </div>
+        <div class="popup-menu-mobile">
+            <div class="profil--wrapper">
+                <span class="initiales-profil"></span>
+            </div>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="#">
+                            <img src="{{ asset('content/icons/profil.svg') }}" alt="user icon svg"/>
+                            <span>Mon compte</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" title="Qui sommes nous ?">Qui sommes nous</a>
+                    </li>
+                    <li>
+                        <a href="#" title="DIY">DIY</a>
+                    </li>
+                    <li>
+                        <a href="#" title="Aide">Aide</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>

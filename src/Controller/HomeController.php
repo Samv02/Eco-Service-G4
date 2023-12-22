@@ -21,11 +21,10 @@ class HomeController extends AbstractController
     public function index(): Response
     {
         // Access the repository using $this->produitRepository
-        $products = $this->produitRepository->findAll();
-
+        
         return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
-            'products' => $products,
+
+           
         ]);
     }
 }

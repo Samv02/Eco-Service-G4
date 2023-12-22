@@ -30,12 +30,12 @@ class Adresse
     #[ORM\Column(length: 255)]
     private ?string $pays_adresse = null;
 
-    #[ORM\OneToMany(mappedBy: 'id_cat', targetEntity: Utilisateur::class)]
-    private Collection $utilisateurs;
+    #[ORM\OneToMany(mappedBy: 'id_adresse', targetEntity: User::class)]
+    private Collection $users;
 
     public function __construct()
     {
-        $this->utilisateurs = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -104,29 +104,29 @@ class Adresse
     }
 
     /**
-     * @return Collection<int, Utilisateur>
+     * @return Collection<int, User>
      */
-    public function getUtilisateurs(): Collection
+    public function getUsers(): Collection
     {
-        return $this->utilisateurs;
+        return $this->users;
     }
 
-    public function addUtilisateur(Utilisateur $utilisateur): static
+    public function addUser(User $user): static
     {
-        if (!$this->utilisateurs->contains($utilisateur)) {
-            $this->utilisateurs->add($utilisateur);
-            $utilisateur->setIdCat($this);
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->setIdAdresse($this);
         }
 
         return $this;
     }
 
-    public function removeUtilisateur(Utilisateur $utilisateur): static
+    public function removeUser(User $user): static
     {
-        if ($this->utilisateurs->removeElement($utilisateur)) {
+        if ($this->users->removeElement($user)) {
             // set the owning side to null (unless already changed)
-            if ($utilisateur->getIdCat() === $this) {
-                $utilisateur->setIdCat(null);
+            if ($user->getIdAdresse() === $this) {
+                $user->setIdAdresse(null);
             }
         }
 

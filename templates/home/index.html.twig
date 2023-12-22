@@ -2,13 +2,12 @@
 
 {% extends 'base.html.twig' %}
 
-{% block content %}
+
+{% block body %}
     <h1>Bienvenue sur Mon Site E-commerce</h1>
     
     <h2>Nos Produits</h2>
     <ul>
-        {% for product in products %}
-            <li>{{ product.name }} - {{ product.price }} €</li>
-        {% endfor %}
+    {{ app.user.email }}
     </ul>
 {% endblock %}

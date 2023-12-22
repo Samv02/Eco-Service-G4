@@ -19,10 +19,6 @@ class Lier
 
     #[ORM\ManyToOne(inversedBy: 'liers')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Utilisateur $id_user = null;
-
-    #[ORM\ManyToOne(inversedBy: 'liers')]
-    #[ORM\JoinColumn(nullable: false)]
     private ?Commande $id_commande = null;
 
     public function getId(): ?int
@@ -38,18 +34,6 @@ class Lier
     public function setIdTicket(?Ticket $id_ticket): static
     {
         $this->id_ticket = $id_ticket;
-
-        return $this;
-    }
-
-    public function getIdUser(): ?Utilisateur
-    {
-        return $this->id_user;
-    }
-
-    public function setIdUser(?Utilisateur $id_user): static
-    {
-        $this->id_user = $id_user;
 
         return $this;
     }

@@ -18,9 +18,6 @@ class Commande
     #[ORM\Column]
     private ?\DateTimeImmutable $date = null;
 
-    #[ORM\ManyToOne(inversedBy: 'commandes')]
-    private ?Utilisateur $id_user = null;
-
     #[ORM\OneToMany(mappedBy: 'id_commande', targetEntity: Composer::class)]
     private Collection $composers;
 
@@ -49,18 +46,6 @@ class Commande
     public function setDate(\DateTimeImmutable $date): static
     {
         $this->date = $date;
-
-        return $this;
-    }
-
-    public function getIdUser(): ?Utilisateur
-    {
-        return $this->id_user;
-    }
-
-    public function setIdUser(?Utilisateur $id_user): static
-    {
-        $this->id_user = $id_user;
 
         return $this;
     }

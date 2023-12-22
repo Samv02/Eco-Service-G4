@@ -4,8 +4,8 @@
     <h1>Welcome to the Home Page</h1>
 
     {# Example of filter links #}
-    <a href="{{ path('app_home', {'marque': 'marque'}) }}">Filtre par Marque</a>
-    <a href="{{ path('app_home', {'categorie': 'categorie'}) }}">Filtre par Catégorie</a>
+    <a href="{{ path('app_home') }}">Reset Filters</a>
+    <a href="{{ path('app_home', {'marque': 'marque', 'categorie': 'menager'}) }}">Filtre par Catégorie Ménager</a>
 
     {% if products is not empty %}  
         <ul>
@@ -29,5 +29,16 @@
         </ul>
     {% else %}
         <p>No products available.</p>
+    {% endif %}
+    
+    {# Additional filter links using the existing criteria #}
+    {% if marque is defined and marque is not empty %}
+        {# Filter link by marque if it's defined and not empty #}
+        <a href="{{ path('app_filter_by_marque', {'id_marque': marque}) }}">Filter by Marque: {{ marque }}</a>
+    {% endif %}
+    
+    {% if categorie is defined and categorie is not empty %}
+        {# Filter link by categorie if it's defined and not empty #}
+        <a href="{{ path('app_filter_by_categorie', {'id_cat': categorie}) }}">Filter by Catégorie: {{ categorie }}</a>
     {% endif %}
 {% endblock %}
